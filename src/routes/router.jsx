@@ -25,11 +25,15 @@ const router = createBrowserRouter([
   element: <Profile />,
   children: [
     {
-      index: true,        // 🔥 DEFAULT
+      index: true,    
       element: <ProfileHome />,
     },
     {
-      path: "orders",
+      path: "product/:id",
+      element: <Product />,
+    },
+    {
+      path: "orders/",
       element: <Orders />,
     },
     {
