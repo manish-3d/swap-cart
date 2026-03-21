@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const Home = () => {
   const [products, setProducts] = useState([]);
 const [error, setError] = useState(null);
-
+const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => {
@@ -13,8 +13,10 @@ const [error, setError] = useState(null);
       return res.json();
     })
     .then((data) => setProducts(data))
-    .catch((err) => setError(err));
+    .catch((err) => setError(err))
+     .finally(() => setLoading(false));
 }, []);
+if (loading) return <h2>⏳ Loading products...</h2>;
 if (error) {
   return <h2>❌ Failed to load products</h2>;
 }
