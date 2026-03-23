@@ -1,25 +1,11 @@
-import { useEffect, useState } from "react";
+import useProducts from "../hooks/useProducts";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-const [error, setError] = useState(null);
-const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => {
-      if (res.status >= 400) {
-        throw new Error("Server error");  // 🔥 IMPORTANT
-      }
-      return res.json();
-    })
-    .then((data) => setProducts(data))
-    .catch((err) => setError(err))
-     .finally(() => setLoading(false));
-}, []);
-if (loading) return <h2>⏳ Loading products...</h2>;
-if (error) {
-  return <h2>❌ Failed to load products</h2>;
-}
+  const { products, loading, error } = useProducts();
+
+  if (loading) return <h2>⏳ Loading...</h2>;
+  if (error) return <h2>❌ Error loading products</h2>;
+
   return (
     <div>
       <h1>🛒 Products</h1>
