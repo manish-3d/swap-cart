@@ -14,7 +14,7 @@ const Home = () => {
         <div key={p.id}>
           <h3>{p.title}</h3>
           <p>₹{p.price}</p>
-        </div>
+        </div>  
       ))}
     </div>
   );
